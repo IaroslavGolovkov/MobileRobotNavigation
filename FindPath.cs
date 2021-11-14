@@ -19,18 +19,24 @@ namespace MobileRobotNavigation
         public int destY;
         //Препятствия
         private Obstacles obs;
+        //Распределение потенциалов по полю
+        List<List<double>> Potential;
+        //Точки маршрута
+        List<List<int>> Path;
 
         public FindPath(Render rd, Robot r, Obstacles ob)
         {
             width = rd.Width;
             height = rd.Height;
-            startX = r.PositionX;
-            startY = r.PositionY;
-            destX = rd.DestinationX;
-            destY = rd.DestinationY;
-
-
-
+            startX = (int)r.PositionX;
+            startY = (int)r.PositionY;
+            destX = (int)rd.DestinationX;
+            destY = (int)rd.DestinationY;
+            Potential = new List<List<double>>();
+        }
+        public void moveToDestination(Robot r)
+        {
+            r.MoveToPoint();
         }
     }
 }

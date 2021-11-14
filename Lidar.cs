@@ -7,7 +7,7 @@ using System.Drawing;
 
 namespace MobileRobotNavigation
 {
-    struct Walls
+    /*struct Walls
     {
         public float w1x;
         public float w1y;
@@ -18,7 +18,7 @@ namespace MobileRobotNavigation
         public float w4x;
         public float w4y;
         public float padding;
-    }
+    }*/
     class Lidar
     {
         public List<float> Data;
@@ -36,7 +36,7 @@ namespace MobileRobotNavigation
 
         private int fieldWidth;
         private int fieldHeight;
-        private Walls walls;
+        //private Walls walls;
         public Lidar(Robot r)
         {
             PositionX = r.PositionX;
@@ -74,7 +74,6 @@ namespace MobileRobotNavigation
             PositionY = r.PositionY;
             Angle = r.Angle;
         }
-
         public void FindDistance(Bitmap bmp)
         {
             Data.Clear();
@@ -235,7 +234,7 @@ namespace MobileRobotNavigation
                 return null;
             return new Tuple<float, float>(Px, Py);
         }
-        private void CalculateWallsCoordinates(Walls w)
+        /*private void CalculateWallsCoordinates(Walls w)
         {
             w.padding = 10;
 
@@ -250,6 +249,6 @@ namespace MobileRobotNavigation
 
             w.w4x = fieldWidth - w.padding;
             w.w4y = 0 + w.padding;
-        }
+        }*/
     }
 }

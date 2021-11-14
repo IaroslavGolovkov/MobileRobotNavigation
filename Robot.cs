@@ -29,6 +29,9 @@ namespace MobileRobotNavigation
         public bool moveLeft = false;
         public bool moveRight = false;
 
+        public float DestinationX;
+        public float DestinationY;
+
         public Robot(PictureBox pb)
         {
             fieldWidth = pb.Width;
@@ -40,6 +43,10 @@ namespace MobileRobotNavigation
             PositionX = (float)fieldWidth / 2.0F;
             PositionY = (float)fieldHeight - 40.0F;
             Angle = Math.PI / 2.0;
+            StopRobot();
+        }
+        public void StopRobot()
+        {
             moveForward = false;
             moveBackward = false;
             moveLeft = false;
@@ -118,6 +125,38 @@ namespace MobileRobotNavigation
                     return true;
             }
             return false;
-        }        
+        }    
+        //Поворот в направлении точки и движение к ней по прямой
+        public void MoveToPoint()
+        {
+            //Вычисление угла
+            double PointAngle = 0; 
+            if (DestinationX == PositionX)
+            {
+                if (DestinationY < PositionY)
+                    PointAngle = Math.PI / 2.0;
+                if (DestinationY > PositionY)
+                    PointAngle = -Math.PI / 2.0;
+            }
+            else
+            {
+                PointAngle = -Math.Atan2(DestinationY - PositionY, DestinationX - PositionX);
+            }
+            //Поворот в сторону точки
+            Angle = PointAngle;
+            //Движение, пока точка не достигнута
+            moveForward = true;
+        }
+        public bool TargetReached()
+        {
+            if(Math.Sqrt(Math.Pow(PositionX - DestinationX, 2) + Math.Pow(PositionY - DestinationY, 2)) < 5)
+                return true;
+            return false;
+        }
+        public void SetDestinationPoint(float x, float y)
+        {
+            DestinationX = x;
+            DestinationY = y;
+        }
     }
 }

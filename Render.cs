@@ -36,8 +36,8 @@ namespace MobileRobotNavigation
             DestinationY = 0;
 
             Defaults();
-        }        
-        public void RenderObstacles(Obstacles obs)  //Отрисовка препятствий на отдельном graphics
+        }
+        public void RenderObstacles(Obstacles obs)  
         {
             obstaclesG.Clear(Color.White);
             Pen pen = new Pen(Color.Black, 3.0F);
@@ -48,20 +48,15 @@ namespace MobileRobotNavigation
                     obs.ObstacleY[i] - obs.ObstacleSize[i] / 2,
                     obs.ObstacleSize[i],
                     obs.ObstacleSize[i]);
-            }            
-        }
-        public void RenderDestinationPoint()
+            }
+        }//Отрисовка препятствий на отдельном graphics
+        public void RenderDestinationPoint(Robot r)
         {
             g.FillEllipse(Brushes.Yellow,
-                DestinationX - DestinationPointSize / 2,
-                DestinationY - DestinationPointSize / 2,
+                r.DestinationX - DestinationPointSize / 2,
+                r.DestinationY - DestinationPointSize / 2,
                 DestinationPointSize,
                 DestinationPointSize);
-        }
-        public void SetDestinationPoint(float x, float y)
-        {
-            DestinationX = x;
-            DestinationY = y;
         }
         public void ShowObstacles(PictureBox pb)
         {
