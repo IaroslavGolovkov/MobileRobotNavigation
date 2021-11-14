@@ -8,14 +8,29 @@ namespace MobileRobotNavigation
 {
     class FindPath
     {
-        private int width;
+        //Ширина и высота поля
+        private int width;  
         private int height;
-        public FindPath(Render r, Obstacles ob)
+        //Координаты начала построения пути
+        public int startX;
+        public int startY;
+        //Координаты точки назначения
+        public int destX;
+        public int destY;
+        //Препятствия
+        private Obstacles obs;
+
+        public FindPath(Render rd, Robot r, Obstacles ob)
         {
-            width = r.Width;
-            height = r.Height;
-            var who = r.DestinationX;
-            var me = r.DestinationY;
+            width = rd.Width;
+            height = rd.Height;
+            startX = r.PositionX;
+            startY = r.PositionY;
+            destX = rd.DestinationX;
+            destY = rd.DestinationY;
+
+
+
         }
     }
 }
