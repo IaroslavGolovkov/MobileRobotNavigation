@@ -38,6 +38,7 @@ namespace MobileRobotNavigation
             this.LidarButton = new System.Windows.Forms.Button();
             this.PlotButton = new System.Windows.Forms.Button();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.pathfind_button = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.SuspendLayout();
@@ -113,11 +114,22 @@ namespace MobileRobotNavigation
             // 
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
+            // pathfind_button
+            // 
+            this.pathfind_button.Location = new System.Drawing.Point(488, 11);
+            this.pathfind_button.Name = "pathfind_button";
+            this.pathfind_button.Size = new System.Drawing.Size(131, 23);
+            this.pathfind_button.TabIndex = 7;
+            this.pathfind_button.Text = "Двигаться к точке";
+            this.pathfind_button.UseVisualStyleBackColor = true;
+            this.pathfind_button.Click += new System.EventHandler(this.pathfind_button_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(689, 617);
+            this.Controls.Add(this.pathfind_button);
             this.Controls.Add(this.PlotButton);
             this.Controls.Add(this.LidarButton);
             this.Controls.Add(this.pictureBox2);
@@ -147,6 +159,7 @@ namespace MobileRobotNavigation
         private System.Windows.Forms.Button LidarButton;
         private System.Windows.Forms.Button PlotButton;
         private System.Windows.Forms.Timer timer1;
+        private System.Windows.Forms.Button pathfind_button;
     }
 }
 
