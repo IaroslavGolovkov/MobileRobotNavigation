@@ -114,5 +114,9 @@ namespace MobileRobotNavigation
             g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
             obstaclesG.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
         }
+        public void RenderGradient(FindPath fp)
+        {
+            
+        }
     }
 }

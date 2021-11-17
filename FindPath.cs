@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -22,7 +23,8 @@ namespace MobileRobotNavigation
         //Распределение потенциалов по полю
         double[,] Potential;
         //Точки маршрута
-        
+        List<float> PathX;
+        List<float> PathY;
         //Значения градиента для начальной и конечной точки, а также для препятствий
         const double gradStart = 1;
         const double gradDestination = -1;
@@ -47,9 +49,13 @@ namespace MobileRobotNavigation
                 for(int y = 0; y < height; y++)
                 {
                     double C = A * x + B * y;
-                    
-                    Potential[x, y] = (gradStart * (C2 - C) + gradDestination * (C - C1))/(C2 - C1);
-                    for(int i = 0; i < ob.numOfObstacles; i++)
+                    if(C>C1 && C<C2)
+                        Potential[x, y] = (gradStart * (C2 - C) + gradDestination * (C - C1))/(C2 - C1);
+                    if (C <= C1)
+                        Potential[x, y] = gradStart;
+                    if (C >= C2)
+                        Potential[x, y] = gradDestination;
+                    for (int i = 0; i < ob.numOfObstacles; i++)
                     {
                         if (Math.Pow(x - ob.ObstacleX[x], 2) + Math.Pow(y - ob.ObstacleY[y], 2) < ob.ObstacleSize[i] + r.Size / 2)
                             Potential[x, y] = gradObstacle;
@@ -59,7 +65,9 @@ namespace MobileRobotNavigation
         }
         public void CalculatePath()
         {
-
+            PathX = new List<float>();
+            PathY = new List<float>();
+            for()
         }
     }
 }
