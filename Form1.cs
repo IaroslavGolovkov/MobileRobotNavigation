@@ -68,25 +68,21 @@ namespace MobileRobotNavigation
                     robot.moveForward = !robot.moveForward;
                     if (robot.moveBackward)
                         robot.moveBackward = false;
-                    //robot.Move(true);
                     break;
                 case Keys.A:
                     robot.moveLeft = !robot.moveLeft;
                     if (robot.moveRight)
                         robot.moveRight = false;
-                    //robot.Rotate(true);
                     break;
                 case Keys.S:
                     robot.moveBackward = !robot.moveBackward;
                     if (robot.moveForward)
                         robot.moveForward = false;
-                    //robot.Move(false);
                     break;
                 case Keys.D:
                     robot.moveRight = !robot.moveRight;
                     if (robot.moveLeft)
                         robot.moveLeft = false;
-                    //robot.Rotate(false);
                     break;
                 //case Keys.Escape:
                 //    Application.Exit();
@@ -135,10 +131,6 @@ namespace MobileRobotNavigation
             if (robot.CollisionFound(fieldObstacles))
             {
                 robot.Set_Default_Position();
-                //robot.moveForward = false;
-                //robot.moveBackward = false;
-                //robot.moveLeft = false;
-                //robot.moveRight = false;
             }
 
             lidar.UpdatePosition(robot);
