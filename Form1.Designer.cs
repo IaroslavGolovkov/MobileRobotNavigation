@@ -39,8 +39,10 @@ namespace MobileRobotNavigation
             this.PlotButton = new System.Windows.Forms.Button();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.pathfind_button = new System.Windows.Forms.Button();
+            this.pictureBox3 = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -124,11 +126,21 @@ namespace MobileRobotNavigation
             this.pathfind_button.UseVisualStyleBackColor = true;
             this.pathfind_button.Click += new System.EventHandler(this.pathfind_button_Click);
             // 
+            // pictureBox3
+            // 
+            this.pictureBox3.BackColor = System.Drawing.Color.White;
+            this.pictureBox3.Location = new System.Drawing.Point(679, 40);
+            this.pictureBox3.Name = "pictureBox3";
+            this.pictureBox3.Size = new System.Drawing.Size(660, 398);
+            this.pictureBox3.TabIndex = 8;
+            this.pictureBox3.TabStop = false;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(689, 617);
+            this.ClientSize = new System.Drawing.Size(1355, 617);
+            this.Controls.Add(this.pictureBox3);
             this.Controls.Add(this.pathfind_button);
             this.Controls.Add(this.PlotButton);
             this.Controls.Add(this.LidarButton);
@@ -144,6 +156,7 @@ namespace MobileRobotNavigation
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Form1_KeyDown);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -160,6 +173,7 @@ namespace MobileRobotNavigation
         private System.Windows.Forms.Button PlotButton;
         private System.Windows.Forms.Timer timer1;
         private System.Windows.Forms.Button pathfind_button;
+        private System.Windows.Forms.PictureBox pictureBox3;
     }
 }
 

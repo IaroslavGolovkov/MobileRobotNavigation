@@ -130,6 +130,8 @@ namespace MobileRobotNavigation
                 //field.SetDestinationPoint((float)mouseEventArgs.X, (float)mouseEventArgs.Y);
                 robot.SetDestinationPoint((float)mouseEventArgs.X, (float)mouseEventArgs.Y);
                 pathfind_button.Enabled = true;
+                fp = new FindPath(field, robot, fieldObstacles);
+                field.RenderGradient(pictureBox3, fp);
             }
         }
 
@@ -147,6 +149,12 @@ namespace MobileRobotNavigation
             if (robot.CollisionFound(fieldObstacles))
             {
                 robot.Set_Default_Position();
+            }
+
+            if (PathfindingActive)
+            {
+                fp.CalculateAngle(robot);
+                robot.Move(true);
             }
 
             if (robot.TargetReached())
@@ -181,10 +189,9 @@ namespace MobileRobotNavigation
                 robot.StopRobot();
                 this.KeyPreview = false;
                 button1.Enabled = false;
-                //fp = new FindPath(field, robot, fieldObstacles);
                 //Двигаться к точке
                 //fp.moveToDestination(robot);
-                robot.MoveToPoint();
+                //robot.MoveToPoint();
             }
             else
             {

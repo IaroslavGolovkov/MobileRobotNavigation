@@ -114,9 +114,20 @@ namespace MobileRobotNavigation
             g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
             obstaclesG.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
         }
-        public void RenderGradient(FindPath fp)
+        public void RenderGradient(PictureBox pb, FindPath fp)
         {
-            
+            pb.Width = (int)fp.width;
+            pb.Height = (int)fp.height;
+            Bitmap grad = new Bitmap(pb.Width, pb.Height);
+            for(int x = 0; x < fp.width; x++)
+            {
+                for(int y = 0; y < fp.height; y++)
+                {
+                    int C = (int)(fp.Potential[x, y] / fp.maxPotential * 255);
+                    grad.SetPixel(x, y, Color.FromArgb(1, 1, C));
+                }
+            }            
+            pb.Image = grad;
         }
     }
 }
