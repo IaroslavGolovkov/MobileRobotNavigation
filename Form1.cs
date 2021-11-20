@@ -161,7 +161,8 @@ namespace MobileRobotNavigation
             {
                 robot.StopRobot();
                 PathfindingActive = false;
-                pathfind_button.Text = "Двигаться к точке";
+                pathfind_button.Text = "Двигаться к точке"; 
+                button1.Enabled = true;
             }
 
             lidar.UpdatePosition(robot);
