@@ -10,64 +10,58 @@ namespace MobileRobotNavigation
     class FindPath
     {
         //Ширина и высота поля
-        private int width;  
-        private int height;
+        public double width;  
+        public double height;
         //Координаты начала построения пути
-        public int startX;
-        public int startY;
+        //public int startX;
+        //public int startY;
         //Координаты точки назначения
-        public int destX;
-        public int destY;
-        //Препятствия
-        private Obstacles obs;
+        public double destX;
+        public double destY;
         //Распределение потенциалов по полю
-        double[,] Potential;
-        //Точки маршрута
-        List<float> PathX;
-        List<float> PathY;
-        //Значения градиента для начальной и конечной точки, а также для препятствий
-        const double gradStart = 1;
-        const double gradDestination = -1;
-        const double gradObstacle = 1;
+        public double[,] Potential;
+        public double maxPotential = 0;
+        //Параметры трехмерных Гауссовых функций
+        private double sigma;
+        private double sigmaK = 0.5;
+        private double A = 0.5;
 
         public FindPath(Render rd, Robot r, Obstacles ob)
         {
             width = rd.Width;
             height = rd.Height;
-            startX = (int)r.PositionX;
-            startY = (int)r.PositionY;
-            destX = (int)rd.DestinationX;
-            destY = (int)rd.DestinationY;
-            Potential = new double[width, height];
-            double A = destX - startX;
-            double B = destY - startY;
-            double C1 = A * startX + B * startY;
-            double C2 = A * destX + B * destY;
+            destX = r.DestinationX;
+            destY = r.DestinationY;
+            Potential = new double[rd.Width, rd.Height];
+            double[] distToCorner = new double[4];
+            distToCorner[0] = Math.Sqrt(Math.Pow(destX-0.0,2) + Math.Pow(destY -0.0, 2));
+            distToCorner[1] = Math.Sqrt(Math.Pow(destX - width,2) + Math.Pow(destY -0.0, 2));
+            distToCorner[2] = Math.Sqrt(Math.Pow(destX -0.0,2) + Math.Pow(destY-height, 2));
+            distToCorner[3] = Math.Sqrt(Math.Pow(destX - width,2) + Math.Pow(destY - height, 2));
+            double gradR = distToCorner.Max();
             //Построение градиента
             for(int x = 0; x < width; x++)
             {
                 for(int y = 0; y < height; y++)
                 {
-                    double C = A * x + B * y;
-                    if(C>C1 && C<C2)
-                        Potential[x, y] = (gradStart * (C2 - C) + gradDestination * (C - C1))/(C2 - C1);
-                    if (C <= C1)
-                        Potential[x, y] = gradStart;
-                    if (C >= C2)
-                        Potential[x, y] = gradDestination;
-                    for (int i = 0; i < ob.numOfObstacles; i++)
+                    Potential[x, y] = Math.Sqrt(Math.Pow(x - destX,2) + Math.Pow(y - destY, 2)) / gradR;
+                    for(int i = 0; i < ob.numOfObstacles; i++)
                     {
-                        if (Math.Pow(x - ob.ObstacleX[x], 2) + Math.Pow(y - ob.ObstacleY[y], 2) < ob.ObstacleSize[i] + r.Size / 2)
-                            Potential[x, y] = gradObstacle;
+                        sigma = sigmaK * ob.ObstacleSize[i];
+                        Potential[x, y] = Potential[x, y] + A * Math.Exp(-(Math.Pow(x - ob.ObstacleX[i], 2) / (2*Math.Pow(sigma, 2)) + Math.Pow(y - ob.ObstacleY[i], 2) / (2 * Math.Pow(sigma, 2))));
                     }
+                    if (Potential[x, y] > maxPotential)
+                        maxPotential = Potential[x, y];
                 }
             }
-        }
-        public void CalculatePath()
+        }        
+        public void CalculateAngle(Robot r)
         {
-            PathX = new List<float>();
-            PathY = new List<float>();
-            for()
+            int x = (int)r.PositionX;
+            int y = (int)r.PositionY;
+            double dx = Potential[x, y] - Potential[x - 1, y];
+            double dy = Potential[x, y] - Potential[x, y - 1];
+            r.Angle = -Math.Atan2(-dy, -dx);            
         }
     }
 }
